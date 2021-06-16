@@ -88,9 +88,83 @@ nhanes_small %>%
 
 
 
+# 9.10 --------------------------------------------------------------------
+
+## FILTERING
+
+#filter for all females
+nhanes_small %>%
+    filter(sex == "female")
+# fiter for all non-females
+nhanes_small %>%
+    filter(sex != "female")
+
+#filter for participants who have a BMI equal to 25
+nhanes_small %>%
+    filter(bmi == 25)
+#filter for participants who have a BMI equal or greater than 25
+nhanes_small %>%
+    filter(bmi >= 25)
+
+# filter for participants where BMI is equal or grater than 25 AND sex is female
+nhanes_small %>%
+    filter(bmi >= 25 & sex == "female")
+
+# filter for participants where BMI is equal or grater than 25 OR sex is female
+nhanes_small %>%
+    filter(bmi > 25 | sex == "female")
+# NOTE: shortcut for | is ALT + I
 
 
+## ARRANGING
 
+# arranging by age (default is ascending order)
+nhanes_small %>%
+    arrange(age)
+
+# arrange by sex (Default is alphabetic a-z order)
+nhanes_small %>%
+    arrange(sex)
+
+# arranging by age in descending (or z-a) order
+nhanes_small %>%
+    arrange(desc(age))
+
+# arranging by sex then age in ascending order
+nhanes_small %>%
+    arrange(sex, age)
+
+# arranging by sex in descending order then age in ascending order
+nhanes_small %>%
+    arrange(desc(sex), age)
+
+
+## TRANSFORM OR ADD COLUMNS
+
+# "mutating"/transforming height in cm into height in meters
+nhanes_small %>%
+    mutate(height = height / 100)
+
+# adding new column with log(height) values
+nhanes_small %>%
+    mutate(log_height = log(height))
+
+# mutating height in cm into height in meters and then dding new column with log(height) values
+nhanes_small %>%
+    mutate(height = height / 100,
+           log_height = log(height))
+
+# adding new column with yes/no for if participants are highly active
+nhanes_small %>%
+    mutate(highly_active = if_else(phys_active_days >= 5, "yes", "no"))
+
+# "save" new columns in dataset
+nhanes_update <- nhanes_small %>%
+    mutate(height = height / 100,
+           log_height = log(height),
+           highly_active = if_else(phys_active_days >= 5, "yes", "no"))
+
+str(nhanes_update)
 
 
 
