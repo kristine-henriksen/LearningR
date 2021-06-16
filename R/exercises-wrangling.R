@@ -256,5 +256,8 @@ usethis::use_data(nhanes_small,
 
 
 
+# 9.20 --------------------------------------------------------------------
+
+load(here::here("data/nhanes_small.rda"))
 
 
