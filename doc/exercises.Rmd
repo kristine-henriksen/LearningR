@@ -2,29 +2,53 @@
 title: "Trying out R Markdown"
 author: "Kristine Henriksen"
 date: "6/16/2021"
-output: word_document
+output: html_document
 ---
+- Kristine Henriksen
+- Ph.D. student
+- Steno Diabetes Center Copenhagen
+- University of Copenhagen
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+source(here::here("R/package-loading.R"))
+load(here::here("data/nhanes_small.rda"))
 ```
 
-## R Markdown
+```{r prettier-table, echo=FALSE, message=FALSE}
+nhanes_small %>%
+    filter(!is.na(diabetes)) %>% 
+    group_by(diabetes, sex) %>% 
+    summarise(mean_age = mean(age, na.rm = TRUE),
+              mean_bmi = mean(bmi, na.rm = TRUE)) %>% 
+    ungroup() %>% 
+    mutate(mean_age = round(mean_age, 1),
+           mean_bmi = round(mean_bmi, 1),
+           sex = str_to_sentence(sex)) %>% 
+    rename("Diabetes Status" = diabetes, Sex = sex,
+           "Mean Age" = mean_age, "Mean BMI" = mean_bmi) %>%
+    knitr::kable(caption = "A prettier Table. Mean values of Age and BMI for each sex and diabetes status.")
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
-
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
-
-```{r cars}
-summary(cars)
 ```
 
-## Including Plots
 
-You can also embed plots, for example:
+# Intro
 
-```{r pressure, echo=FALSE}
-plot(pressure)
+This is where I'll write *cool* stuff that will **blow** your mind.
+
+![Image by unknown from Google.](images/dog.jpeg)
+
+```{r kitten-image}
+knitr::include_graphics(here::here("doc/images/dog.jpeg"))
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+# Methods and Results
+
+## Analysis
+
+```{r}
+2+2
+```
+
+
+# Discussion
