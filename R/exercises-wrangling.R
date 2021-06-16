@@ -88,7 +88,7 @@ nhanes_small %>%
 
 
 
-# 9.10 --------------------------------------------------------------------
+# 9.10-12 --------------------------------------------------------------------
 
 ## FILTERING
 
@@ -114,6 +114,7 @@ nhanes_small %>%
 nhanes_small %>%
     filter(bmi > 25 | sex == "female")
 # NOTE: shortcut for | is ALT + I
+
 
 
 ## ARRANGING
@@ -167,6 +168,46 @@ nhanes_update <- nhanes_small %>%
 str(nhanes_update)
 
 
+# Exercise 9.13 -----------------------------------------------------------
+
+# 1. BMI between 20 and 40 with diabetes
+nhanes_small %>%
+    # Format should follow: variable >= number or character
+    filter(bmi >= 20 & bmi <= 40 & diabetes == "Yes")
+
+# Pipe the data into mutate function and:
+nhanes_modified <- nhanes_small %>% # Specifying dataset
+    mutate(
+        # 2. Calculate mean arterial pressure
+        ___ = ___,
+        # 3. Create young_child variable using a condition
+        ___ = if_else(___, "Yes", "No")
+    )
+
+nhanes_modified
 
 
+
+# 9.14 --------------------------------------------------------------------
+
+# summary statistics by group
+
+# maximum bmi
+nhanes_small %>%
+    summarise(max_bmi = max(bmi)) # wont give you max bmi because of NAs
+
+# maximum bmi excluding NA values
+nhanes_small %>%
+    summarise(max_bmi = max(bmi, na.rm = TRUE))
+
+# how many NA values are there?
+nhanes_small %>%
+    summarise(sum.na = sum(is.na(bmi)))
+# or
+summary(nhanes_small)
+
+# calculating 2 max and min
+nhanes_small %>%
+    summarise(max_bmi = max(bmi, na.rm = TRUE),
+              min_bmi = min(bmi, na.rm = TRUE))
 
