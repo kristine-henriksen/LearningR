@@ -52,13 +52,27 @@ nhanes_small <- rename_with(nhanes_small, snakecase::to_snake_case)
 # rename specific columns
 nhanes_small <- rename(nhanes_small, sex = gender)
 
-## PIPE ( %>% = "and then")
+## THE PIPE OPERATOR ( %>% = "and then")
+colnames(nhanes_small)
+# is the same as:
 nhanes_small %>%
     colnames()
 
 nhanes_small %>%
     select(phys_active) %>%
     rename(physically_active = phys_active)
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
