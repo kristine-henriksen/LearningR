@@ -52,7 +52,7 @@ nhanes_small <- rename_with(nhanes_small, snakecase::to_snake_case)
 # rename specific columns
 nhanes_small <- rename(nhanes_small, sex = gender)
 
-## THE PIPE OPERATOR ( %>% = "and then")
+## THE PIPE OPERATOR %>% = "and then" (shortcut CTRL + SHIFT + M)
 colnames(nhanes_small)
 # is the same as:
 nhanes_small %>%
@@ -63,8 +63,28 @@ nhanes_small %>%
     rename(physically_active = phys_active)
 
 
+# Exercise 9.9 ------------------------------------------------------------
+
+nhanes_small %>%
+    select(tot_chol, bp_sys_ave, poverty)
+
+nhanes_small %>%
+    rename(diabetes_diagnosis_age = diabetes_age)
+
+# Rewrite this with pipe:
+select(nhanes_small, bmi, contains("age"))
+# then becomes
+nhanes_small %>%
+    select(bmi, contains("age"))
 
 
+# Rewrite this with pipe:
+physical_activity <- select(nhanes_small, phys_active_days, phys_active)
+rename(physical_activity, days_phys_active = phys_active_days)
+# then becomes
+nhanes_small %>%
+    select(phys_active_days, phys_active) %>%
+    rename(days_phys_active = phys_active_days)
 
 
 
