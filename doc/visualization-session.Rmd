@@ -225,6 +225,18 @@ nhanes_tidied %>%
 ```
 
 
+# Exercise for changing colours
+
+```{r exercise-discrete-variables}
+# Barplot to work from, with two discrete variables
+base_barplot <- nhanes_tidied %>% 
+    ggplot(aes(x = diabetes, fill = sex)) +
+    geom_bar(position = position_dodge())
+
+base_barplot +
+    scale_fill_viridis_d()
+```
+
 
 
 
