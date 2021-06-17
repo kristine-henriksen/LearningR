@@ -1,0 +1,54 @@
+---
+title: "Visualization session"
+author: "Kristine Henriksen"
+date: "17/6/2021"
+output: html_document
+---
+```{r setup}
+source(here::here("R/package-loading.R")) #load packages
+load(here::here("data/nhanes_small.rda")) #load data
+```
+
+# One variable plots
+
+```{r continuous-variables}
+# good plots for continuous variables
+# density plot
+ggplot(nhanes_small, aes(x = bmi)) +
+    geom_density()
+
+# histogram
+ggplot(nhanes_small, aes(x = bmi)) +
+    geom_histogram()
+
+
+```
+
+```{r discrete-variables}
+# good plots for continuous variables
+# barplots
+ggplot(nhanes_small, aes(x = sex)) + 
+    geom_bar()
+
+ggplot(nhanes_small, aes(x = diabetes)) +
+    geom_bar()
+
+```
+
+```{r removing-NA-values}
+nhanes_tidied <- nhanes_small %>% 
+    filter(!is.na(diabetes))
+# save the new tidied dataset in our data folder
+usethis::use_data(nhanes_tidied, overwrite = TRUE)
+
+ggplot(nhanes_tidied, aes(x = diabetes)) +
+    geom_bar()
+
+```
+
+# Two variable plots
+
+```{r}
+
+```
+
